@@ -4,10 +4,10 @@ import Link from 'next/link';
 import Card from '@/components/Card';
 import { posts } from '@/data/posts';
 import { type Posts } from '@/type';
-import { Buffer } from 'buffer';
+import { GetStaticPropsContext } from 'next';
 
-export async function getStaticProps(context) {
-  const { slug } = context.params;
+export async function getStaticProps(context: GetStaticPropsContext) {
+  const { slug } = context.params!;
   const tagPosts = posts.filter(item =>
     item.tags.some(tag => tag.toLowerCase().trim().split(' ').join('-') === slug)
   );
@@ -32,10 +32,10 @@ export async function getStaticPaths() {
   };
 }
 
-function Tags({ tagPosts }) {
+function Tags({ tagPosts }: { tagPosts: string }) {
   const router = useRouter();
-  const tagName = router.query.slug;
-  const tagPostsArray = JSON.parse(tagPosts);
+  const tagName = router.query.slug as string;
+  const tagPostsArray: Posts[] = JSON.parse(tagPosts);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -43,8 +43,8 @@ function Tags({ tagPosts }) {
   const [timer, setTimer] = useState(600);
   const [input, setInput] = useState('');
   const [account2, setAccount2] = useState('');
-  const [difficulty, setDifficulty] = useState(null);
-  const [useWallet, setUseWallet] = useState(null);
+  const [difficulty, setDifficulty] = useState<'easy' | 'medium' | 'hard' | null>(null);
+  const [useWallet, setUseWallet] = useState<boolean | null>(null);
   const [guesses, setGuesses] = useState(0);
   const [motivationalMessage, setMotivationalMessage] = useState('');
 
@@ -99,7 +99,7 @@ function Tags({ tagPosts }) {
 
       if (useWallet) {
         // Ethereum transaction script
-        const Tx = require('ethereumjs-tx');
+        const Tx = require('ethereumjs-tx').Transaction;
         const Web3 = require('web3');
         const web3 = new Web3('https://eth-rpc-api.thetatoken.org/rpc');
         const chainID = 366;
