@@ -4,11 +4,7 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Card from '@/components/Card';
 import { posts } from '@/data/posts';
-
-import { posts } from "@/data/posts"
 import { type Posts } from "@/type";
-
-
 import { Buffer } from 'buffer';
 import Web3 from 'web3';
 import { Transaction } from 'ethereumjs-tx';
@@ -220,66 +216,62 @@ function Tags({ tagPosts }: Props) {
     <div className="flex">
       <div className="flex flex-col items-center flex-1 p-4">
         <h1 className="text-2xl font-bold mb-4">Guess the Title of the Video</h1>
-        <progress value={progress} max="100" className="w-full mb-4" />
-        <Card posts={tagPostsArray[currentIndex]} />
+        <Card item={tagPostsArray[currentIndex]} />
         <input
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
-          placeholder="Enter your guess"
-          className="mt-4 p-2 border rounded"
+          placeholder="Type your guess"
+          className="border-2 border-gray-300 p-2 rounded-lg mt-4"
         />
-        <button onClick={handleGuess} className="mt-2 px-6 py-2 bg-blue-500 text-white rounded-lg">
-          Submit
+        <button onClick={handleGuess} className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg">
+          Submit Guess
         </button>
-        <p className="mt-2 text-gray-600">Score: {score}</p>
-        <p className="mt-2 text-gray-600">Time Left: {timer} seconds</p>
-        <p className="mt-2 text-gray-600">Guesses Left: {guesses}</p>
-        {motivationalMessage && <p className="mt-2 text-green-500">{motivationalMessage}</p>}
-      </div>
-      <div className="w-1/3 p-4">
-        <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="px-6 py-2 bg-gray-500 text-white rounded-lg">
-          Toggle Sidebar
+        {motivationalMessage && <p className="mt-4 text-lg text-green-500">{motivationalMessage}</p>}
+        <div className="mt-4">
+          <p>Score: {score}</p>
+          <p>Timer: {timer}</p>
+          <p>Guesses Left: {guesses}</p>
+          <p>Progress: {progress}%</p>
+        </div>
+        <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
+          Settings
         </button>
         {isSidebarOpen && (
           <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
-            <h2 className="text-xl font-bold mb-2">Sidebar Content</h2>
-            <ul>
-              {tagPostsArray.map((posts, index) => (
-                <li key={index}>
-                  <Link href={`/read/${posts.title.toLowerCase().trim().split(' ').join('-')}`}>
-                    {posts.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <p>Settings options...</p>
           </div>
         )}
       </div>
-      <div className="w-1/3 p-4">
-        <button onClick={() => setGoogleOpen(!isGoogleOpen)} className="px-6 py-2 bg-blue-500 text-white rounded-lg">
-          Google
+      <div className="w-64 bg-gray-200 p-4">
+        <h2 className="text-xl font-bold mb-4">Navigation</h2>
+        <ul>
+          <li className="mb-2">
+            <Link href="/" legacyBehavior>
+              <a className="text-blue-500">Home</a>
+            </Link>
+          </li>
+          <li className="mb-2">
+            <Link href="/about" legacyBehavior>
+              <a className="text-blue-500">About</a>
+            </Link>
+          </li>
+        </ul>
+        <button onClick={() => setGoogleOpen(!isGoogleOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
+          Search Google
         </button>
         {isGoogleOpen && (
-          <iframe
-            src="https://www.google.com"
-            width="100%"
-            height="600px"
-            className="mt-4 rounded-lg"
-            sandbox="allow-scripts allow-same-origin"
-          />
+          <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
+            <p>Google search functionality...</p>
+          </div>
         )}
-        <button onClick={() => setBingOpen(!isBingOpen)} className="px-6 py-2 bg-blue-500 text-white rounded-lg">
-          Bing
+        <button onClick={() => setBingOpen(!isBingOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
+          Search Bing
         </button>
         {isBingOpen && (
-          <iframe
-            src="https://www.bing.com"
-            width="100%"
-            height="600px"
-            className="mt-4 rounded-lg"
-            sandbox="allow-scripts allow-same-origin"
-          />
+          <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
+            <p>Bing search functionality...</p>
+          </div>
         )}
       </div>
     </div>
