@@ -10,6 +10,9 @@
 
 [Try it](https://fast-prompt.vercel.app/)
 
+
+In order to host url of theta video and generated content, view [MongoDB data storage](https://fast-prompt.vercel.app/)
+
 ## Getting Started
 
 ```bash
