@@ -1,3 +1,5 @@
+// Database sample
+
 export const posts: Array<{
   id: string;
   title: string;
