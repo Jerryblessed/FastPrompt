@@ -1,3 +1,4 @@
+// pages/tags/[slug].tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -184,102 +185,101 @@ function Tags({ tagPosts }: Props) {
           How to Play
         </button>
         {isHowToPlayOpen && (
-          <div className="mt-4 p
--4 bg-white shadow-lg rounded-lg">
-<p>Instructions for the game go here...</p>
-</div>
-)}
-</div>
-);
-}
+          <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
+            <p>Instructions for the game go here...</p>
+          </div>
+        )}
+      </div>
+    );
+  }
 
-if (difficulty === null) {
-return (
-<div className="flex flex-col items-center justify-center h-screen">
-<h1 className="text-3xl font-bold mb-4">Choose Difficulty</h1>
-<div className="flex space-x-4">
-<button onClick={() => setDifficulty('easy')} className="px-6 py-3 bg-blue-500 text-white rounded-lg">
-Easy
-</button>
-<button onClick={() => setDifficulty('medium')} className="px-6 py-3 bg-yellow-500 text-white rounded-lg">
-Medium
-</button>
-<button onClick={() => setDifficulty('hard')} className="px-6 py-3 bg-red-500 text-white rounded-lg">
-Hard
-</button>
-</div>
-</div>
-);
-}
+  if (difficulty === null) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-3xl font-bold mb-4">Choose Difficulty</h1>
+        <div className="flex space-x-4">
+          <button onClick={() => setDifficulty('easy')} className="px-6 py-3 bg-blue-500 text-white rounded-lg">
+            Easy
+          </button>
+          <button onClick={() => setDifficulty('medium')} className="px-6 py-3 bg-yellow-500 text-white rounded-lg">
+            Medium
+          </button>
+          <button onClick={() => setDifficulty('hard')} className="px-6 py-3 bg-red-500 text-white rounded-lg">
+            Hard
+          </button>
+        </div>
+      </div>
+    );
+  }
 
-return (
-<div className="flex">
-<div className="flex flex-col items-center flex-1 p-4">
-<h1 className="text-2xl font-bold mb-4">Guess the Title of the Video</h1>
-<progress value={progress} max="100" className="w-full mb-4" />
-<Card post={tagPostsArray[currentIndex]} />
-<input
-type="text"
-value={input}
-onChange={(e) => setInput(e.target.value)}
-placeholder="Enter your guess"
-className="mt-4 p-2 border rounded"
-/>
-<button onClick={handleGuess} className="mt-2 px-6 py-2 bg-blue-500 text-white rounded-lg">
-Submit
-</button>
-<p className="mt-2 text-gray-600">Score: {score}</p>
-<p className="mt-2 text-gray-600">Time Left: {timer} seconds</p>
-<p className="mt-2 text-gray-600">Guesses Left: {guesses}</p>
-{motivationalMessage && <p className="mt-2 text-green-500">{motivationalMessage}</p>}
-</div>
-<div className="w-1/3 p-4">
-<button onClick={() => setSidebarOpen(!isSidebarOpen)} className="px-6 py-2 bg-gray-500 text-white rounded-lg">
-Toggle Sidebar
-</button>
-{isSidebarOpen && (
-<div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
-<h2 className="text-xl font-bold mb-2">Sidebar Content</h2>
-<ul>
-{tagPostsArray.map((post, index) => (
-<li key={index}>
-<Link href={/read/${post.title.toLowerCase().trim().split(' ').join('-')}}>
-{post.title}
-</Link>
-</li>
-))}
-</ul>
-</div>
-)}
-</div>
-<div className="w-1/3 p-4">
-<button onClick={() => setGoogleOpen(!isGoogleOpen)} className="px-6 py-2 bg-blue-500 text-white rounded-lg">
-Google
-</button>
-{isGoogleOpen && (
-<iframe
-         src="https://www.google.com"
-         width="100%"
-         height="600px"
-         className="mt-4 rounded-lg"
-         sandbox="allow-scripts allow-same-origin"
-       />
-)}
-<button onClick={() => setBingOpen(!isBingOpen)} className="px-6 py-2 bg-blue-500 text-white rounded-lg">
-Bing
-</button>
-{isBingOpen && (
-<iframe
-         src="https://www.bing.com"
-         width="100%"
-         height="600px"
-         className="mt-4 rounded-lg"
-         sandbox="allow-scripts allow-same-origin"
-       />
-)}
-</div>
-</div>
-);
+  return (
+    <div className="flex">
+      <div className="flex flex-col items-center flex-1 p-4">
+        <h1 className="text-2xl font-bold mb-4">Guess the Title of the Video</h1>
+        <progress value={progress} max="100" className="w-full mb-4" />
+        <Card post={tagPostsArray[currentIndex]} />
+        <input
+          type="text"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          placeholder="Enter your guess"
+          className="mt-4 p-2 border rounded"
+        />
+        <button onClick={handleGuess} className="mt-2 px-6 py-2 bg-blue-500 text-white rounded-lg">
+          Submit
+        </button>
+        <p className="mt-2 text-gray-600">Score: {score}</p>
+        <p className="mt-2 text-gray-600">Time Left: {timer} seconds</p>
+        <p className="mt-2 text-gray-600">Guesses Left: {guesses}</p>
+        {motivationalMessage && <p className="mt-2 text-green-500">{motivationalMessage}</p>}
+      </div>
+      <div className="w-1/3 p-4">
+        <button onClick={() => setSidebarOpen(!isSidebarOpen)} className="px-6 py-2 bg-gray-500 text-white rounded-lg">
+          Toggle Sidebar
+        </button>
+        {isSidebarOpen && (
+          <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
+            <h2 className="text-xl font-bold mb-2">Sidebar Content</h2>
+            <ul>
+              {tagPostsArray.map((post, index) => (
+                <li key={index}>
+                  <Link href={`/read/${post.title.toLowerCase().trim().split(' ').join('-')}`}>
+                    {post.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+      <div className="w-1/3 p-4">
+        <button onClick={() => setGoogleOpen(!isGoogleOpen)} className="px-6 py-2 bg-blue-500 text-white rounded-lg">
+          Google
+        </button>
+        {isGoogleOpen && (
+          <iframe
+            src="https://www.google.com"
+            width="100%"
+            height="600px"
+            className="mt-4 rounded-lg"
+            sandbox="allow-scripts allow-same-origin"
+          />
+        )}
+        <button onClick={() => setBingOpen(!isBingOpen)} className="px-6 py-2 bg-blue-500 text-white rounded-lg">
+          Bing
+        </button>
+        {isBingOpen && (
+          <iframe
+            src="https://www.bing.com"
+            width="100%"
+            height="600px"
+            className="mt-4 rounded-lg"
+            sandbox="allow-scripts allow-same-origin"
+          />
+        )}
+      </div>
+    </div>
+  );
 }
 
 export default Tags;
