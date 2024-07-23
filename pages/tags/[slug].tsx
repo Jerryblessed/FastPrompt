@@ -278,9 +278,9 @@ function Tags({ tagPosts }: Props) {
             </Link>
           </li>
           <li className="mb-2">
-            <Link href="/about" legacyBehavior>
-              <a className="text-blue-500">About</a>
-            </Link>
+           <Link href="https://paystack.com/pay/47piu3ljaq" passHref>
+          <a className="text-blue-500" target="_blank" rel="noopener noreferrer">Support ❤️</a>
+          </Link>
           </li>
         </ul>
         <button onClick={() => setGoogleOpen(!isGoogleOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
