@@ -1,4 +1,3 @@
-// pages/tags/[slug].tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -60,6 +59,7 @@ function Tags({ tagPosts }: Props) {
   const [useWallet, setUseWallet] = useState<boolean | null>(null);
   const [guesses, setGuesses] = useState(0);
   const [motivationalMessage, setMotivationalMessage] = useState('');
+  const [addressPrompt, setAddressPrompt] = useState('');
 
   useEffect(() => {
     if (difficulty === 'easy') {
@@ -83,7 +83,6 @@ function Tags({ tagPosts }: Props) {
       setTimer(difficulty === 'easy' ? 600 : difficulty === 'medium' ? 300 : 150);
       setGuesses(difficulty === 'easy' ? 15 : difficulty === 'medium' ? 10 : 5);
     } else if (timer <= 0 || guesses <= 0) {
-      alert('Game Over! Try again.');
       setCurrentIndex(0);
       setScore(0);
       setProgress(0);
@@ -111,6 +110,13 @@ function Tags({ tagPosts }: Props) {
       setTimeout(() => setMotivationalMessage(''), 2000);
 
       if (useWallet) {
+        if (!/^(0x)?[0-9a-fA-F]{40}$/.test(account2)) {
+          setAddressPrompt('Please enter a valid wallet address 😅');
+          return;
+        } else {
+          setAddressPrompt('');
+        }
+
         const web3 = new Web3('https://eth-rpc-api.thetatoken.org/rpc');
         const chainID = 366;
         const account1 = '0x19E7E376E7C213B7E7e7e46cc70A5dD086DAff2A';
@@ -142,10 +148,10 @@ function Tags({ tagPosts }: Props) {
               return;
             }
             console.log('txHash:', txHash);
+            setMotivationalMessage('Transaction done! Correct! Moving to the next...');
+            setTimeout(() => setMotivationalMessage(''), 2000);
           });
         });
-
-        alert('25 Tfuel added');
       }
     } else {
       setInput('');
@@ -174,11 +180,11 @@ function Tags({ tagPosts }: Props) {
       <div className="flex flex-col items-center justify-center h-screen">
         <h1 className="text-3xl font-bold mb-4">Do you want to use Wallet or Theta address?</h1>
         <div className="flex space-x-4">
-          <button onClick={() => setUseWallet(true)} className="px-6 py-3 bg-blue-500 text-white rounded-lg">
-            Use Wallet
+          <button onClick={() => setUseWallet(false)} className="px-6 py-3 bg-blue-500 text-white rounded-lg">
+            Use without Wallet
           </button>
-          <button onClick={() => setUseWallet(false)} className="px-6 py-3 bg-green-500 text-white rounded-lg">
-            Use Theta address
+          <button onClick={() => setUseWallet(true)} className="px-6 py-3 bg-green-500 text-white rounded-lg">
+            Use with Theta address
           </button>
         </div>
         <button onClick={() => setHowToPlayOpen(!isHowToPlayOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
@@ -189,6 +195,26 @@ function Tags({ tagPosts }: Props) {
             <p>Instructions for the game go here...</p>
           </div>
         )}
+      </div>
+    );
+  }
+
+  if (useWallet && !account2) {
+    return (
+      <div className="flex flex-col items-center justify-center h-screen">
+        <h1 className="text-3xl font-bold mb-4">Enter Theta Address</h1>
+        <p className="text-lg text-gray-600 mb-4">This is using the send sign transaction feature of Theta Web3 and not sending any tokens.</p>
+        <input
+          type="text"
+          value={account2}
+          onChange={(e) => setAccount2(e.target.value)}
+          placeholder="Theta Address"
+          className="border-2 border-gray-300 p-2 rounded-lg mt-4"
+        />
+        <button onClick={() => handleGuess()} className="mt-4 px-6 py-3 bg-blue-500 text-white rounded-lg">
+          Submit
+        </button>
+        {addressPrompt && <p className="mt-4 text-lg text-red-500">{addressPrompt}</p>}
       </div>
     );
   }
@@ -215,7 +241,7 @@ function Tags({ tagPosts }: Props) {
   return (
     <div className="flex">
       <div className="flex flex-col items-center flex-1 p-4">
-        <h1 className="text-2xl font-bold mb-4">Guess the Title of the Video</h1>
+        <h1 className="text-2xl font-bold mb-4">Please double tap video for full screen</h1>
         <Card item={tagPostsArray[currentIndex]} />
         <input
           type="text"
@@ -243,8 +269,8 @@ function Tags({ tagPosts }: Props) {
           </div>
         )}
       </div>
-      <div className="w-64 bg-gray-200 p-4">
-        <h2 className="text-xl font-bold mb-4">Navigation</h2>
+      <div className="w-64 bg-orange-200 p-4">
+        <h2 className="text-xl font-bold mb-4">Artifical Intelligence support</h2>
         <ul>
           <li className="mb-2">
             <Link href="/" legacyBehavior>
@@ -258,20 +284,24 @@ function Tags({ tagPosts }: Props) {
           </li>
         </ul>
         <button onClick={() => setGoogleOpen(!isGoogleOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
-          Search Google
+          lLama 3 8B
         </button>
         {isGoogleOpen && (
-          <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
-            <p>Google search functionality...</p>
-          </div>
+          <iframe
+            src="https://wind-theta-five.vercel.app/"
+            title="Google"
+            className="mt-4 w-full h-64 bg-white shadow-lg rounded-lg"
+          ></iframe>
         )}
         <button onClick={() => setBingOpen(!isBingOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
-          Search Bing
+          Gemini Pro
         </button>
         {isBingOpen && (
-          <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
-            <p>Bing search functionality...</p>
-          </div>
+          <iframe
+            src="https://gemini-chat-eight-bice.vercel.app/"
+            title="Bing"
+            className="mt-4 w-full h-64 bg-white shadow-lg rounded-lg"
+          ></iframe>
         )}
       </div>
     </div>
