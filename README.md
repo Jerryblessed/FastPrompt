@@ -1,13 +1,11 @@
-FastPrompt
+# FastPrompt 🚀
 
-Enter multiple prompt
-90% AI theta generated AI conten
-performing theta signed transaction as players move on
-AI in game help from lLama 82b and Gemini
-ThetaPass login
-Creative levels
-
-
+- Enter multiple prompts ✏️
+- 90% AI theta generated content 🤖
+- Performing theta signed transactions as players move on 🔄
+- AI in-game help from LLaMA 82b and Gemini 🤝
+- ThetaPass login 🔐
+- Creative levels 🎨
 
 ## Getting Started
 
