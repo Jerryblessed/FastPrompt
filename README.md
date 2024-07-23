@@ -1,4 +1,13 @@
-OpenBlog is open source template is design and built with nextjs and tailwind CSS. 
+FastPrompt
+
+Enter multiple prompt
+90% AI theta generated AI conten
+performing theta signed transaction as players move on
+AI in game help from lLama 82b and Gemini
+ThetaPass login
+Creative levels
+
+
 
 ## Getting Started
 
@@ -76,9 +85,17 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 │   ├── thirteen.svg
 │   └── vercel.svg
 ├── README.md
+
+
+
+
 ├── styles
 │   └── globals.css
 ├── tailwind.config.js
 ├── tsconfig.json
 └── type.d.ts
 ```
+
+
+Spacial thanks to [OpenBlog](https://github.com/frontendweb3/open-blog) for their framework
+
