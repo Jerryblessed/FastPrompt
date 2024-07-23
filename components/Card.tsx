@@ -1,7 +1,7 @@
 // components/Card.tsx
 import Image from "next/image";
 import Link from "next/link";
-import { Post } from "@/type"; // Ensure this matches the correct path and export
+import { Posts } from "@/type"; // Ensure this matches the correct path and export
 
 function Card({ post }: { post: Post }) {
   return (
