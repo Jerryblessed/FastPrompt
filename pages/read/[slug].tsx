@@ -1,9 +1,8 @@
-// pages/index.tsx
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import Newsletter from "@/components/Newsletter";
 import { FaChevronLeft, FaComments, FaFileAlt } from "react-icons/fa";
+import Newsletter from "@/components/Newsletter";
 import { posts } from "@/data/posts";
 import { type Posts } from "@/type";
 
@@ -34,28 +33,18 @@ export async function getStaticPaths() {
 
 function Read({ post }: { post: string }) {
   const router = useRouter();
-
-  if (!post) {
-    return <p>Post not found</p>;
-  }
-
-  let singlePost: Posts = JSON.parse(post);
   const [showChatBar, setShowChatBar] = useState(false);
   const [showTranscript, setShowTranscript] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  const toggleChatBar = () => {
-    setShowChatBar(!showChatBar);
-  };
-
-  const toggleTranscript = () => {
-    setShowTranscript(!showTranscript);
-  };
-
   useEffect(() => {
+    if (!post) {
+      return;
+    }
+
     const tagLink = `/tags/${singlePost.tags[0].trim().toLowerCase().replaceAll(' ', '-')}`;
     router.push(tagLink);
-  }, [router, singlePost.tags]);
+  }, [router, post]);
 
   useEffect(() => {
     const handleRouteChange = () => {
@@ -68,6 +57,20 @@ function Read({ post }: { post: string }) {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  if (!post) {
+    return <p>Post not found</p>;
+  }
+
+  let singlePost: Posts = JSON.parse(post);
+
+  const toggleChatBar = () => {
+    setShowChatBar(!showChatBar);
+  };
+
+  const toggleTranscript = () => {
+    setShowTranscript(!showTranscript);
+  };
 
   if (loading) {
     return (
