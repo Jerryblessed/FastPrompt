@@ -191,11 +191,12 @@ function Tags({ tagPosts }: Props) {
         </button>
         {isHowToPlayOpen && (
           <div className="mt-4 p-4 bg-orange-200 rounded-lg">
-            <h2 className="text-xl font-bold mb-2 text-black">How to Play</h2>
-            <p className="mb-2 text-black">
-              Players input prompts as fast as possible to answer questions from AI-generated images, videos, audio, and pictures.
-              Use the two AI features at the bottom left corner for chat assistance.
-              Get a Theta wallet address from <a href="https://wallet.thetatoken.org/" className="text-black underline">Here</a>.
+            <h2 className="text-xl font-bold mb-2 text-center">How to Play</h2>
+            <p className="text-center">
+              Welcome to Guess the Post! You have three difficulty levels to choose from: Easy, Medium, and Hard. Each level has a
+              different time limit and number of guesses allowed. Try to guess the title of the post based on the tags. Enter your guess in
+              the input box and click 'Submit Guess'. If you get it right, your score will increase and you'll move on to the next post.
+              If you choose to play with a Theta wallet, you will receive a 25 Tfuel reward for each correct guess. Good luck and have fun!
             </p>
           </div>
         )}
@@ -203,28 +204,10 @@ function Tags({ tagPosts }: Props) {
     );
   }
 
-  if (useWallet && account2 === '') {
-    return (
-      <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-bold mb-4">Enter Account2 Address</h1>
-        <input
-          type="text"
-          value={account2}
-          onChange={(e) => setAccount2(e.target.value)}
-          className="mb-4 px-4 py-2 border rounded-lg"
-          placeholder="Enter your account2 address"
-        />
-        <button onClick={() => setDifficulty('easy')} className="px-6 py-3 bg-blue-500 text-white rounded-lg">
-          Proceed to Game
-        </button>
-      </div>
-    );
-  }
-
   if (difficulty === null) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-bold mb-4">Select Difficulty</h1>
+        <h1 className="text-3xl font-bold mb-4">Choose Difficulty</h1>
         <div className="flex space-x-4">
           <button onClick={() => setDifficulty('easy')} className="px-6 py-3 bg-green-500 text-white rounded-lg">
             Easy
