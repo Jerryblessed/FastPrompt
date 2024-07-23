@@ -1,21 +1,16 @@
+// pages/tags/[slug].tsx
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Card from '@/components/Card';
 import { posts } from '@/data/posts';
-import { type Posts } from '@/type';
+import { Post } from '@/type';
 import { Buffer } from 'buffer';
 import Web3 from 'web3';
 import { Transaction } from 'ethereumjs-tx';
 
 interface Props {
   tagPosts: string;
-}
-
-interface Post {
-  id: number;
-  title: string;
-  tags: string[];
 }
 
 interface Context {
