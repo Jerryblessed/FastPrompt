@@ -7,6 +7,9 @@
 - ThetaPass login 🔐
 - Creative levels 🎨
 
+
+[Try it](https://fast-prompt.vercel.app/)
+
 ## Getting Started
 
 ```bash
