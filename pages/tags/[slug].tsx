@@ -172,13 +172,13 @@ function Tags({ tagPosts }: Props) {
   if (useWallet === null) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-3xl font-bold mb-4">Choose Mode</h1>
+        <h1 className="text-3xl font-bold mb-4">Do you want to use Wallet or Theta address?</h1>
         <div className="flex space-x-4">
-          <button onClick={() => setUseWallet(false)} className="px-6 py-3 bg-purple-500 text-white rounded-lg">
-            Use Without Theta Wallet address
+          <button onClick={() => setUseWallet(true)} className="px-6 py-3 bg-blue-500 text-white rounded-lg">
+            Use Wallet
           </button>
-          <button onClick={() => setUseWallet(true)} className="px-6 py-3 bg-green-500 text-white rounded-lg">
-            Use With Wallet Theta address
+          <button onClick={() => setUseWallet(false)} className="px-6 py-3 bg-green-500 text-white rounded-lg">
+            Use Theta address
           </button>
         </div>
         <button onClick={() => setHowToPlayOpen(!isHowToPlayOpen)} className="mt-4 px-6 py-3 bg-gray-500 text-white rounded-lg">
