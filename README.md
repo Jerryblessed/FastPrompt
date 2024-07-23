@@ -100,6 +100,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 Spacial thanks to [OpenBlog](https://github.com/frontendweb3/open-blog) for their framework
 
-[Support development❤️](https://paystack.com/pay/47piu3ljaq){:target="_blank" rel="noopener noreferrer"}
-
-
+[Support development❤️](https://paystack.com/pay/47piu3ljaq)
