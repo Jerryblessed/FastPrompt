@@ -4,7 +4,11 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Card from '@/components/Card';
 import { posts } from '@/data/posts';
-import { Post } from '@/type';
+
+import { posts } from "@/data/posts"
+import { type Posts } from "@/type";
+
+
 import { Buffer } from 'buffer';
 import Web3 from 'web3';
 import { Transaction } from 'ethereumjs-tx';
@@ -48,7 +52,7 @@ export async function getStaticPaths() {
 function Tags({ tagPosts }: Props) {
   const router = useRouter();
   const tagName = router.query.slug as string;
-  const tagPostsArray: Post[] = JSON.parse(tagPosts);
+  const tagPostsArray: Posts[] = JSON.parse(tagPosts);
 
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -217,7 +221,7 @@ function Tags({ tagPosts }: Props) {
       <div className="flex flex-col items-center flex-1 p-4">
         <h1 className="text-2xl font-bold mb-4">Guess the Title of the Video</h1>
         <progress value={progress} max="100" className="w-full mb-4" />
-        <Card post={tagPostsArray[currentIndex]} />
+        <Card posts={tagPostsArray[currentIndex]} />
         <input
           type="text"
           value={input}
@@ -241,10 +245,10 @@ function Tags({ tagPosts }: Props) {
           <div className="mt-4 p-4 bg-white shadow-lg rounded-lg">
             <h2 className="text-xl font-bold mb-2">Sidebar Content</h2>
             <ul>
-              {tagPostsArray.map((post, index) => (
+              {tagPostsArray.map((posts, index) => (
                 <li key={index}>
-                  <Link href={`/read/${post.title.toLowerCase().trim().split(' ').join('-')}`}>
-                    {post.title}
+                  <Link href={`/read/${posts.title.toLowerCase().trim().split(' ').join('-')}`}>
+                    {posts.title}
                   </Link>
                 </li>
               ))}
