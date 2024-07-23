@@ -14,7 +14,7 @@ function Card({ item }: { item: Posts }) {
           <p className="text-sm text-gray-500 dark:text-gray-400">5 min read</p>
         </div>
 
-{/*         <Link className="text-lg" href={`/read/${item.title.toLowerCase().trim().split(" ").join("-")}`}>
+        {/* <Link className="text-lg" href={`/read/${item.title.toLowerCase().trim().split(" ").join("-")}`}>
           {item.title}
         </Link> */}
 
